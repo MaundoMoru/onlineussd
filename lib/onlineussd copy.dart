@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -25,15 +24,15 @@ class _OnlineUssdState extends State<OnlineUssd> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        // title: const Text('Online Ussd'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           physics: const ScrollPhysics(),
           child: Form(
             key: _form,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
                   height: 10,
@@ -75,9 +74,7 @@ class _OnlineUssdState extends State<OnlineUssd> {
                                   .replaceAll('\\n', "\n")
                                   .replaceAll(":", '');
                             });
-                            setState(() {
-                              isLoading = false;
-                            });
+                            // print(res!['0']);
                           } else {
                             throw Exception('Failed to load album');
                           }
@@ -110,16 +107,16 @@ class _OnlineUssdState extends State<OnlineUssd> {
                 const SizedBox(
                   height: 20,
                 ),
-                isLoading != false
-                    ? const Center(
-                        child: SizedBox(
-                          height: 30,
-                          width: 30,
+                res == null && isLoading != false
+                    ? const SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: Center(
                           child: CircularProgressIndicator(),
                         ),
                       )
                     : res == null
-                        ? const Text('')
+                        ? Text('')
                         : Text("$res"),
                 const SizedBox(
                   height: 30,
@@ -151,9 +148,6 @@ class _OnlineUssdState extends State<OnlineUssd> {
                                       .replaceAll("\"", '')
                                       .replaceAll('\\n', "\n")
                                       .replaceAll(":", '');
-                                });
-                                setState(() {
-                                  isLoading = false;
                                 });
                               } else {
                                 throw Exception('Failed to load album');
