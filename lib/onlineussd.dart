@@ -127,10 +127,6 @@ class _OnlineUssdState extends State<OnlineUssd> {
                     // start
                     TextFormField(
                         controller: _selectOption,
-                        validator: (value) {
-                          if (value!.isEmpty || value.length < 1)
-                            return 'Enter phone number';
-                        },
                         decoration: InputDecoration(
                           hintText: '',
                           border: const OutlineInputBorder(),
